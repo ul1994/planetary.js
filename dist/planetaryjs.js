@@ -191,7 +191,7 @@
           context.beginPath();
           planet.path.context(context)({type: 'Sphere'});
 
-          context.fillStyle = config.fill || 'black';
+          context.fillStyle = config.fill || 'transparent';
           context.fill();
         });
       });
@@ -213,7 +213,7 @@
           planet.path.context(context)(land);
 
           if (config.fill !== false) {
-            context.fillStyle = config.fill || 'white';
+            context.fillStyle = config.fill || 'transparent';
             context.fill();
           }
 
@@ -245,7 +245,7 @@
       planet.onInit(function() {
         var world = planet.plugins.topojson.world;
         var countries = world.objects.countries;
-        var type = config.type || 'internal';
+        var type = config.type || 'both';
         borders = topojson.mesh(world, countries, borderFns[type]);
       });
 
@@ -253,7 +253,7 @@
         planet.withSavedContext(function(context) {
           context.beginPath();
           planet.path.context(context)(borders);
-          context.strokeStyle = config.stroke || 'gray';
+          context.strokeStyle = config.stroke || 'white';
           if (config.lineWidth) context.lineWidth = config.lineWidth;
           context.stroke();
         });
@@ -282,7 +282,7 @@
 
     var addPing = function(lng, lat, options) {
       options = options || {};
-      options.color = options.color || config.color || 'white';
+      options.color = options.color || config.color || 'gray';
       options.angle = options.angle || config.angle || 5;
       options.ttl   = options.ttl   || config.ttl   || 2000;
       var ping = { time: new Date(), options: options };
